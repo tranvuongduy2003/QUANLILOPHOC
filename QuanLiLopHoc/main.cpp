@@ -89,14 +89,14 @@ int main()
 	PrintList(danhSachSinhVien, 1);
 
 
-	/*QuickSort(danhSachSinhVien);
+	QuickSort(danhSachSinhVien);
 	cout << "Danh sach sinh vien sau khi sap xep:\n";
-	PrintList(danhSachSinhVien, 0);*/
+	PrintList(danhSachSinhVien, 0);
 
 	
-	/*OrderedInsert(danhSachSinhVien, t);
+	OrderedInsert(danhSachSinhVien, t);
 	cout << "Danh sach sinh vien sau khi chen:\n";
-	PrintList(danhSachSinhVien, 0);*/
+	PrintList(danhSachSinhVien, 0);
 
 	return 0;
 }
@@ -218,7 +218,7 @@ void QuickSort(LSINHVIEN& l)
 	CreateList(l2);
 
 	m = l.head;
-	l.head = m	->next;
+	l.head = m->next;
 
 	while (l.head != NULL)
 	{
@@ -226,9 +226,9 @@ void QuickSort(LSINHVIEN& l)
 		l.head = p->next;
 		p->next = NULL;
 		if (p->gpa <= m->gpa)
-			InsertTail(l1, l.head);
+			InsertHead(l1, p);
 		else
-			InsertTail(l2, l.head);
+			InsertHead(l2, p);
 	}
 
 	QuickSort(l1);
@@ -256,6 +256,8 @@ void PrintList(LSINHVIEN l, int option)
 	cout << left << setw(nameWidth) << setfill(separator) << "Ma so";
 	cout << left << setw(nameWidth) << setfill(separator) << "Ho ten";
 	cout << left << setw(numWidth) << setfill(separator) << "DTB";
+	if (option == 1)
+		cout << left << setw(nameWidth + 9) << setfill(separator) << "Xep loai";
 	cout << endl;
 	while (p != NULL)
 	{
@@ -308,11 +310,11 @@ void InsertHead(LSINHVIEN& l, NSINHVIEN* p)
 }
 void InsertTail(LSINHVIEN& l, NSINHVIEN* p)
 {
-	if (l.tail == NULL)
+	if (l.head == NULL)
 	{
-		l.tail = p;
-		l.head = l.tail;
-	}
+		l.head = p;
+		l.tail = l.head;
+	}	
 	else
 	{
 		p->next = NULL;
